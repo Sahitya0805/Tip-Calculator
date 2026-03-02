@@ -2,16 +2,28 @@ const input1 = document.getElementById("a1");
 const input2 = document.getElementById("a2");
 const para1 = document.getElementById("para");
 
-function same() {
-    let value1 = Number(input1.value);
-    let value2 = Number(input2.value);
+function calculate() {
+    const bill = Number(input1.value.trim());
+    const tip = Number(input2.value.trim());
 
-    para1.textContent = "The total of bill is " + 
-        (value1 + (value1 * (value2 / 100)));
+    if (bill <= 0 || isNaN(bill)) {
+        para1.textContent = "Enter valid bill amount";
+        para1.style.color = "red";
+        return;
+    }
 
-    para1.style.fontSize = "30px";
-    para1.style.marginTop = "30px";
-    para1.style.fontWeight = "700";
-    para1.style.textAlign = "center";
+    if (tip < 0 || isNaN(tip)) {
+        para1.textContent = "Enter valid tip %";
+        para1.style.color = "red";
+        return;
+    }
+
+    const total = bill + bill * tip / 100;
+    para1.textContent = `Total bill with tip: $${total.toFixed(2)}`;
     para1.style.color = "white";
+}
+
+// Backward-compatibility for older HTML using onclick="same()"
+function same() {
+    calculate();
 }
