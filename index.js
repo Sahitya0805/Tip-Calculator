@@ -1,6 +1,14 @@
 const input1 = document.getElementById("a1");
 const input2 = document.getElementById("a2");
 const para1 = document.getElementById("para");
+const form = document.querySelector("form");
+
+if (form) {
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        calculate();
+    });
+}
 
 function calculate() {
     const bill = Number(input1.value.trim());
